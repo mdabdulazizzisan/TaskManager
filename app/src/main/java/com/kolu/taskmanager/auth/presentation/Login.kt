@@ -89,6 +89,30 @@ fun Login(
             visualTransformation = if(passwordVisibility)
                 VisualTransformation.None else PasswordVisualTransformation()
         )
+
+        Spacer(Modifier.height(20.dp))
+
+        FilledIconButton(
+            onClick = {
+                // todo
+            },
+            shape = RoundedCornerShape(10),
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .fillMaxWidth()
+        ) {
+            Icon(
+                imageVector = Icons.Default.ArrowForward,
+                contentDescription = "login button",
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .border(
+                        width = 1.dp,
+                        color = LocalContentColor.current,
+                        shape = CircleShape
+                    )
+            )
+         }
     }
 
 }
