@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Lock
@@ -34,12 +36,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.kolu.taskmanager.R
+import com.kolu.taskmanager.auth.presentation.components.OutlinedTextFieldPassword
 
 @Composable
 fun Login(
@@ -48,7 +52,7 @@ fun Login(
 ) {
     val context = LocalContext.current
     var email by remember { mutableStateOf(TextFieldValue("")) }
-    var password by remember { mutableStateOf(TextFieldValue("")) }
+    var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
     val passwordVisibilityIcon = if (passwordVisibility) painterResource(R.drawable.visible) else painterResource(R.drawable.invisible)
 
@@ -62,7 +66,7 @@ fun Login(
         Column(
             modifier = Modifier
                 .wrapContentSize()
-                .padding(start = 64.dp, end = 64.dp)
+                .width(280.dp)
         ){
             Text(
                 text = "Get Started With",
@@ -85,26 +89,17 @@ fun Login(
                     email = it
                 }
             )
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(text = "password") },
-                value = password,
-                onValueChange = {
+
+            OutlinedTextFieldPassword(
+                password = password,
+                onPasswordChange = {
                     password = it
                 },
-                leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = null) },
-                trailingIcon = {
-                    IconButton(onClick = {
-                        passwordVisibility = !passwordVisibility
-                    }) {
-                        Icon(
-                            painter = passwordVisibilityIcon,
-                            contentDescription = null)
-                    }
+                onVisibilityChange = {
+                    passwordVisibility = it
                 },
-                visualTransformation = if(passwordVisibility)
-                    VisualTransformation.None else PasswordVisualTransformation(),
-                singleLine = true
+                modifier = Modifier
+                    .fillMaxWidth()
             )
 
             Spacer(Modifier.height(20.dp))
