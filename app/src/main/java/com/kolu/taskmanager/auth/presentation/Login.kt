@@ -58,6 +58,7 @@ fun Login(
         Spacer(Modifier.height(20.dp))
 
         OutlinedTextField(
+            singleLine = true,
             modifier = Modifier
                 .fillMaxWidth(),
             leadingIcon = {Icon(
@@ -67,7 +68,7 @@ fun Login(
             value = email,
             onValueChange = {
                 email = it
-            },
+            }
         )
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
@@ -87,7 +88,8 @@ fun Login(
                 }
             },
             visualTransformation = if(passwordVisibility)
-                VisualTransformation.None else PasswordVisualTransformation()
+                VisualTransformation.None else PasswordVisualTransformation(),
+            singleLine = true
         )
 
         Spacer(Modifier.height(20.dp))
