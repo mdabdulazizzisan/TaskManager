@@ -49,7 +49,6 @@ fun Login(
     var email by remember { mutableStateOf(TextFieldValue("")) }
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
-    val passwordVisibilityIcon = if (passwordVisibility) painterResource(R.drawable.visible) else painterResource(R.drawable.invisible)
 
     BackgroundAuth(modifier = modifier)
 
@@ -152,7 +151,7 @@ fun Login(
                     modifier = Modifier
                         .clickable {
                             Toast
-                                .makeText(context, "Clicked", Toast.LENGTH_SHORT)
+                                .makeText(context, "Sign Up", Toast.LENGTH_SHORT)
                                 .show()
                         },
                     text = "Sign Up",
@@ -162,9 +161,6 @@ fun Login(
             }
         }
     }
-
-
-
 }
 
 @Preview(showBackground = true)
