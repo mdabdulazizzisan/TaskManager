@@ -1,4 +1,4 @@
-package com.kolu.taskmanager.core.domain.data.networking
+package com.kolu.taskmanager.core.data.networking
 
 import com.kolu.taskmanager.BuildConfig
 
