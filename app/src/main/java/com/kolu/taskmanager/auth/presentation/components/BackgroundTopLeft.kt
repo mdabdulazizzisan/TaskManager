@@ -2,6 +2,8 @@
 * Converted using https://composables.com/svgtocompose
 */
 
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathFillType
 import androidx.compose.ui.graphics.SolidColor
@@ -12,10 +14,12 @@ import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
 public val BackgroundTopLeft: ImageVector
+	@Composable
 	get() {
 		if (_BackgroundTopLeft != null) {
 			return _BackgroundTopLeft!!
 		}
+		val strokeColor = MaterialTheme.colorScheme.primary
 		_BackgroundTopLeft = ImageVector.Builder(
             name = "AuthTopRight",
             defaultWidth = 412.dp,
@@ -24,7 +28,7 @@ public val BackgroundTopLeft: ImageVector
             viewportHeight = 468f
         ).apply {
 			path(
-    			fill = SolidColor(Color(0xFF8EE0B7)),
+    			fill = SolidColor(strokeColor),
     			fillAlpha = 0.15f,
     			stroke = null,
     			strokeAlpha = 0.15f,

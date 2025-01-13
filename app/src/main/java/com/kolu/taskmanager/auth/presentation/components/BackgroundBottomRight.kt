@@ -2,6 +2,8 @@
 * Converted using https://composables.com/svgtocompose
 */
 
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathFillType
 import androidx.compose.ui.graphics.SolidColor
@@ -13,10 +15,12 @@ import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
 public val BackgroundBottomRight: ImageVector
+	@Composable
 	get() {
 		if (_BackgroundBottomRight != null) {
 			return _BackgroundBottomRight!!
 		}
+		val strokeColor = MaterialTheme.colorScheme.primary
 		_BackgroundBottomRight = ImageVector.Builder(
             name = "BackgroundBottomLeft",
             defaultWidth = 170.dp,
@@ -28,7 +32,7 @@ public val BackgroundBottomRight: ImageVector
 				path(
     				fill = null,
     				fillAlpha = 0.14f,
-    				stroke = SolidColor(Color(0xFF21BF73)),
+    				stroke = SolidColor(strokeColor),
     				strokeAlpha = 0.14f,
     				strokeLineWidth = 1.0f,
     				strokeLineCap = StrokeCap.Butt,
@@ -45,7 +49,7 @@ public val BackgroundBottomRight: ImageVector
 				path(
     				fill = null,
     				fillAlpha = 0.14f,
-    				stroke = SolidColor(Color(0xFF21BF73)),
+    				stroke = SolidColor(strokeColor),
     				strokeAlpha = 0.14f,
     				strokeLineWidth = 1.0f,
     				strokeLineCap = StrokeCap.Butt,
@@ -62,7 +66,7 @@ public val BackgroundBottomRight: ImageVector
 				path(
     				fill = null,
     				fillAlpha = 0.14f,
-    				stroke = SolidColor(Color(0xFF21BF73)),
+    				stroke = SolidColor(strokeColor),
     				strokeAlpha = 0.14f,
     				strokeLineWidth = 1.0f,
     				strokeLineCap = StrokeCap.Butt,
@@ -79,7 +83,7 @@ public val BackgroundBottomRight: ImageVector
 				path(
     				fill = null,
     				fillAlpha = 0.14f,
-    				stroke = SolidColor(Color(0xFF21BF73)),
+    				stroke = SolidColor(strokeColor),
     				strokeAlpha = 0.14f,
     				strokeLineWidth = 1.0f,
     				strokeLineCap = StrokeCap.Butt,
@@ -96,7 +100,7 @@ public val BackgroundBottomRight: ImageVector
 				path(
     				fill = null,
     				fillAlpha = 0.14f,
-    				stroke = SolidColor(Color(0xFF21BF73)),
+    				stroke = SolidColor(strokeColor),
     				strokeAlpha = 0.14f,
     				strokeLineWidth = 1.0f,
     				strokeLineCap = StrokeCap.Butt,
@@ -113,7 +117,7 @@ public val BackgroundBottomRight: ImageVector
 				path(
     				fill = null,
     				fillAlpha = 0.14f,
-    				stroke = SolidColor(Color(0xFF21BF73)),
+    				stroke = SolidColor(strokeColor),
     				strokeAlpha = 0.14f,
     				strokeLineWidth = 1.0f,
     				strokeLineCap = StrokeCap.Butt,
@@ -130,7 +134,7 @@ public val BackgroundBottomRight: ImageVector
 				path(
     				fill = null,
     				fillAlpha = 0.14f,
-    				stroke = SolidColor(Color(0xFF21BF73)),
+    				stroke = SolidColor(strokeColor),
     				strokeAlpha = 0.14f,
     				strokeLineWidth = 1.0f,
     				strokeLineCap = StrokeCap.Butt,
