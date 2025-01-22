@@ -22,7 +22,6 @@ inline fun <T, E: Error> Result<T, E>.onError(action: (E) -> Unit): Result<T, E>
             this
         }
         is Result.Success -> this
-        else -> {this}
     }
 
 }

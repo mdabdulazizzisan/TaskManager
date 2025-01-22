@@ -18,7 +18,7 @@ import com.kolu.taskmanager.R
 fun OutlinedTextFieldPassword(
     password: String = "",
     onPasswordChange: (String) -> Unit,
-    passwordVisibility: Boolean = false,
+    passwordVisibility: Boolean,
     onVisibilityChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -47,7 +47,8 @@ fun OutlinedTextFieldPassword(
         visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Password
-        )
+        ),
+        singleLine = true
     )
 }
 
