@@ -10,9 +10,9 @@ sealed interface Screens {
 
         @Serializable
         class LoginSuccessDest(
-            val mobile: String,
-            val firstName: String,
-            val lastName: String
+            val mobile: String = "Default",
+            val firstName: String = "Default",
+            val lastName: String = "Default"
         )
     }
 }

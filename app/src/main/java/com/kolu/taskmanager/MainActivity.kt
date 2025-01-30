@@ -35,10 +35,11 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val viewModel = koinViewModel<LoginViewModel>()
+                    val token by viewModel.token.collectAsStateWithLifecycle()
                     val state by viewModel.state.collectAsStateWithLifecycle()
                     val navController = rememberNavController()
                     NavHost(
-                        startDestination = Screens.AuthDestGroup.LoginDest,
+                        startDestination = if(token.isNullOrEmpty()) Screens.AuthDestGroup.LoginDest else Screens.AuthDestGroup.LoginSuccessDest(),
                         navController = navController
                         ){
                         composable<Screens.AuthDestGroup.LoginDest> {
@@ -67,7 +68,7 @@ class MainActivity : ComponentActivity() {
                                         text = "Lastname: " + (data?.lastName ?: "N/A")
                                     )
                                     Text(
-                                        text = "Mobile: " + (data?.mobile ?: "N/A")
+                                        text = "Token: $token"
                                     )
                                 }
                             }

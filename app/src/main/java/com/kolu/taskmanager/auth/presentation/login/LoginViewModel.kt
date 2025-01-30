@@ -10,8 +10,10 @@ import com.kolu.taskmanager.core.domain.util.onSuccess
 import com.kolu.taskmanager.navigation.Screens
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -25,6 +27,12 @@ class LoginViewModel(
 
     private val _events = Channel<LoginEvents>()
     val events = _events.receiveAsFlow()
+
+    val token = userPreferences.token.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        null
+    )
 
 
     fun onAction(
