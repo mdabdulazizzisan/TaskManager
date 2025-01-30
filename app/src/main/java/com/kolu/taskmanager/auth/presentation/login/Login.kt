@@ -1,7 +1,6 @@
 package com.kolu.taskmanager.auth.presentation.login
 
 import BackgroundAuth
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -28,43 +27,27 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.compose.LocalLifecycleOwner
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.kolu.taskmanager.auth.data.networking.AuthRepository
 import com.kolu.taskmanager.auth.presentation.components.OutlinedTextFieldPassword
 import com.kolu.taskmanager.core.domain.util.NetworkError
 import com.kolu.taskmanager.core.presentation.util.ObserveAsEvents
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.withContext
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun Login(
     state: LoginState,
     modifier: Modifier = Modifier
         .fillMaxSize(),
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    viewModel: LoginViewModel
 ) {
-    val viewModel: LoginViewModel = koinViewModel<LoginViewModel>()
 
     val context = LocalContext.current
     ObserveAsEvents(events = viewModel.events) { event ->
@@ -200,13 +183,4 @@ fun Login(
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun LoginPrev() {
-    Login(
-        state = LoginState(),
-
-    )
 }

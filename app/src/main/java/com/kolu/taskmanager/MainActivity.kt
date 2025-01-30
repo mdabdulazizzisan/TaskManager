@@ -10,20 +10,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.kolu.taskmanager.auth.presentation.login.Login
-import com.kolu.taskmanager.auth.presentation.login.LoginState
 import com.kolu.taskmanager.auth.presentation.login.LoginViewModel
 import com.kolu.taskmanager.navigation.Screens
 import com.kolu.taskmanager.ui.theme.TaskManagerTheme
@@ -49,6 +46,7 @@ class MainActivity : ComponentActivity() {
                                 state = state,
                                 modifier = Modifier.padding(innerPadding),
                                 navController = navController,
+                                viewModel = viewModel
                             )
                         }
                         composable<Screens.AuthDestGroup.LoginSuccessDest> {
@@ -78,15 +76,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TaskManagerTheme {
-        Login(state = LoginState())
     }
 }

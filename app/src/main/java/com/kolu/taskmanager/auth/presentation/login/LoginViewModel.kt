@@ -1,15 +1,12 @@
 package com.kolu.taskmanager.auth.presentation.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.kolu.taskmanager.auth.data.networking.AuthRepository
-import com.kolu.taskmanager.core.domain.util.NetworkError
+import com.kolu.taskmanager.core.data.UserPreferences
 import com.kolu.taskmanager.core.domain.util.onError
 import com.kolu.taskmanager.core.domain.util.onSuccess
-import com.kolu.taskmanager.core.domain.util.toString
 import com.kolu.taskmanager.navigation.Screens
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +16,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    val authRepository: AuthRepository,
+    private val authRepository: AuthRepository,
+    val userPreferences: UserPreferences
 ): ViewModel() {
 
     private val _state = MutableStateFlow(LoginState())
@@ -47,7 +45,10 @@ class LoginViewModel(
                     )
                 }
             }
-            is LoginAction.OnLoginButtonClick -> login(action.navController)
+            is LoginAction.OnLoginButtonClick -> login(
+                navController = action.navController,
+                userPreferences= userPreferences
+            )
             LoginAction.OnPasswordVisibilityChange -> {
                 _state.update {
                     it.copy(
@@ -59,11 +60,17 @@ class LoginViewModel(
     }
 
 
-    private fun login(navController: NavHostController){
+    private fun login(
+        navController: NavHostController,
+        userPreferences: UserPreferences
+    ){
         viewModelScope.launch {
             val result = authRepository.LoginRequest(_state.value.email, _state.value.password)
             result
                 .onSuccess { loginResponse ->
+                    userPreferences.saveToken(
+                        token = loginResponse.token
+                    )
                     navController.navigate(
                         Screens.AuthDestGroup.LoginSuccessDest(
                             firstName = loginResponse.data.firstName,
@@ -71,11 +78,6 @@ class LoginViewModel(
                             mobile = loginResponse.data.mobile
                         )
                     )
-//                    _state.update {
-//                        it.copy(
-//                            email = loginResponse.token
-//                        )
-//                    }
                 }
                 .onError { err ->
                     _events.send(LoginEvents.Error(err))

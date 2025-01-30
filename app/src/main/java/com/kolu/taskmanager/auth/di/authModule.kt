@@ -1,5 +1,6 @@
 package com.kolu.taskmanager.auth.di
 
+import com.kolu.taskmanager.core.data.UserPreferences
 import com.kolu.taskmanager.auth.data.networking.AuthRepository
 import com.kolu.taskmanager.auth.presentation.login.LoginViewModel
 import com.kolu.taskmanager.core.data.networking.KtorClientFactory
@@ -15,4 +16,6 @@ val authModule = module {
     singleOf(::AuthRepository)
 
     viewModelOf(::LoginViewModel)
+
+    singleOf(::UserPreferences)
 }

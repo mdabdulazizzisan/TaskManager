@@ -65,6 +65,9 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose:2.8.5")
 
+    //DataStore to save login token
+    implementation ("androidx.datastore:datastore-preferences:1.1.2")
+
     implementation(libs.bundles.koin)
 
     implementation(libs.bundles.ktor)
