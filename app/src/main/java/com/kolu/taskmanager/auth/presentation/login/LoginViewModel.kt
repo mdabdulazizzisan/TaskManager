@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val authRepository: AuthRepository,
-    val userPreferences: UserPreferences
+    private val userPreferences: UserPreferences
 ): ViewModel() {
 
     private val _state = MutableStateFlow(LoginState())

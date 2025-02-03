@@ -4,15 +4,15 @@ import kotlinx.serialization.Serializable
 
 sealed interface Screens {
     @Serializable
-    object AuthDestGroup{
+    data object AuthDestGroup : Screens {
         @Serializable
-        object LoginDest
+        data object LoginDest : Screens
 
         @Serializable
-        class LoginSuccessDest(
+        data class LoginSuccessDest(
             val mobile: String = "Default",
             val firstName: String = "Default",
             val lastName: String = "Default"
-        )
+        ) : Screens
     }
 }

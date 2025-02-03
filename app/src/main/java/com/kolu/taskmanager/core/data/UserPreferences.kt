@@ -1,10 +1,10 @@
 package com.kolu.taskmanager.core.data
 
 import android.content.Context
-import android.util.Log
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 class UserPreferences(context: Context) {
@@ -24,5 +24,12 @@ class UserPreferences(context: Context) {
 
     val token = dataStore.data.map { prefences ->
         prefences[TOKEN_KEY]
+    }
+
+    suspend fun hasToken(): Boolean{
+        return token.map {
+            println("LoginSuccess: Token Check token: $it")
+            it != null
+        }.first()
     }
 }

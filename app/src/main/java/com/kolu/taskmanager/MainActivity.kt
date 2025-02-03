@@ -23,27 +23,39 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.kolu.taskmanager.auth.presentation.login.Login
 import com.kolu.taskmanager.auth.presentation.login.LoginViewModel
+import com.kolu.taskmanager.core.presentation.MainViewModel
 import com.kolu.taskmanager.navigation.Screens
 import com.kolu.taskmanager.ui.theme.TaskManagerTheme
 import org.koin.androidx.compose.koinViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
+    private val mainViewModel: MainViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         installSplashScreen()
+            .apply {
+                setKeepOnScreenCondition{
+                    mainViewModel.splashScreen.value
+                }
+            }
         setContent {
             TaskManagerTheme {
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val viewModel = koinViewModel<LoginViewModel>()
+                    val startDest by mainViewModel.startDest.collectAsStateWithLifecycle()
                     val token by viewModel.token.collectAsStateWithLifecycle()
                     val state by viewModel.state.collectAsStateWithLifecycle()
                     val navController = rememberNavController()
+                    println("LoginSuccess: startDest out of navGraph = $startDest")
+
                     NavHost(
-                        startDestination = if(token.isNullOrEmpty()) Screens.AuthDestGroup.LoginDest else Screens.AuthDestGroup.LoginSuccessDest(),
+                        startDestination = startDest,
                         navController = navController
                         ){
+                        println("LoginSuccess: startDest in navGraph = $startDest")
                         composable<Screens.AuthDestGroup.LoginDest> {
                             Login(
                                 state = state,
